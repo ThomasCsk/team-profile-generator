@@ -7,7 +7,7 @@ const promptManager = () => {
   const questions = [
   {
     type: 'input',
-    name: 'mName',
+    name: 'name',
     message: 'What is your Manager\'s name?',
     validate: nameInput => {
       if(nameInput){
@@ -80,7 +80,7 @@ const promptEngineer = () => {
   const questions = [
     {
       type: 'input',
-      name: 'eName',
+      name: 'name',
       message: 'What is your Engineer\'s name?',
       validate: nameInput => {
         if(nameInput){
@@ -152,7 +152,7 @@ const promptIntern = () => {
   const questions = [
     {
       type: 'input',
-      name: 'iName',
+      name: 'name',
       message: 'What is your Intern\'s name?',
       validate: nameInput => {
         if(nameInput){
