@@ -6,6 +6,8 @@ var employee = new Employee({
   email: 'tciszek515@gmail.com',
 });
 
+console.log(employee);
+
 test(('Creates a new employee'), () => {
   expect(employee.name).toBe('Dave');
   expect(employee.id).toBe('1');
