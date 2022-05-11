@@ -1,5 +1,7 @@
 const inquirer = require('inquirer');
-const fs = require('fs');
+const generateHTML = require('./src/page-template');
+const {writeFile, copyFile} = require('./utils/generate-file');
+
 
 var team = [];
 
@@ -236,7 +238,7 @@ const promptMenu = () => {
       promptIntern();
     }
     else{
-     console.log(team);
+     console.log('Team Completed!');
     }
   })
   .catch(err => {
@@ -244,4 +246,4 @@ const promptMenu = () => {
   });
 }
 
-promptManager();
+promptManager()
