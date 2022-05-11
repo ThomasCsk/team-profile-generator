@@ -14,6 +14,10 @@ test(('Creates a new intern'), () => {
   expect(intern.school).toBe('University of Richmond');
 });
 
+test(('gets school'), () => {
+  expect(intern.getSchool()).toBe('University of Richmond');
+});
+
 test(('gets role'), () => {
   expect(intern.getRole()).toBe('Intern');
 });

@@ -14,6 +14,10 @@ test(('Creates a new engineer'), () => {
   expect(engineer.github).toBe('ThomasCsk');
 });
 
+test(('gets github'), () => {
+  expect(engineer.getGithub()).toBe('ThomasCsk');
+});
+
 test(('gets role'), () => {
   expect(engineer.getRole()).toBe('Engineer');
 });

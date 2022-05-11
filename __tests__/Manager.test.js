@@ -14,6 +14,10 @@ test(('Creates a new manager'), () => {
   expect(manager.office).toBe('3');
 });
 
+test(('gets office number'), () => {
+  expect(manager.getOffice()).toBe('3');
+});
+
 test(('gets role'), () => {
   expect(manager.getRole()).toBe('Manager');
 });
