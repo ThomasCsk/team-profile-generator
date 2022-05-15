@@ -1,16 +1,16 @@
-const inquirer = require('inquirer')
-const generateHTML = require('./src/page-template');
-const {writeFile, copyFile} = require('./utils/generate-file');
+const inquirer = require('inquirer') // Inquirer node package: used to get information back from user based off of question answers
+const generateHTML = require('./src/page-template'); // Imported function to generate html file content based off of the answers to questions in this file
+const {writeFile, copyFile} = require('./utils/generate-file'); // Functions used to make the required files for the /dist folder
 
-var team = [];
+var team = []; // Holds the answers to the questions
 
-const promptManager = () => {
+const promptManager = () => { // Asks the user for information about the manager
   const questions = [
   {
-    type: 'input',
-    name: 'name',
-    message: 'What is your Manager\'s name?',
-    validate: nameInput => {
+    type: 'input', // Determines what kind of answer should be given back (a string in this case)
+    name: 'name', // the key for this answer's value
+    message: 'What is your Manager\'s name?', // The displayed question
+    validate: nameInput => { // Checks to see if an answer was given and re-asks the question if none was given
       if(nameInput){
         return true;
       }
@@ -63,12 +63,12 @@ const promptManager = () => {
     }
   }];
   console.log('--- Manager ---');
-  inquirer.prompt(questions)
+  inquirer.prompt(questions) // Displays the questions above in the terminal
   .then((answers) => {
-    team.push(answers)
+    team.push(answers) // Adds the answers to the team object
   })
   .then(() =>{
-    promptMenu();
+    promptMenu(); // Sends the user to the menu
   })
   .catch(err => {
     console.log(err);
@@ -135,12 +135,12 @@ const promptEngineer = () => {
     }];
 
     console.log('--- Engineer ---');
-    inquirer.prompt(questions)
+    inquirer.prompt(questions) // Displays the questions above in the terminal
     .then((answers) => {
-      team.push(answers)
+      team.push(answers) // Adds the answers to the team object
     })
     .then(() =>{
-      promptMenu();
+      promptMenu(); // Sends the user to the menu
     })
     .catch(err => {
       console.log(err);
@@ -207,12 +207,12 @@ const promptIntern = () => {
     }];
   
     console.log('--- Intern ---');
-    inquirer.prompt(questions)
+    inquirer.prompt(questions) // Displays the questions above in the terminal
     .then((answers) => {
-      team.push(answers)
+      team.push(answers) // Adds the answers to the team object
     })
     .then(() =>{
-      promptMenu();
+      promptMenu(); // Sends the user to the menu
     })
     .catch(err => {
       console.log(err);
@@ -222,20 +222,20 @@ const promptIntern = () => {
 const promptMenu = () => {
   console.log('--- Menu ---');
   inquirer.prompt({
-    type: 'list',
+    type: 'list', // This makes the user choose one of the given choices
     name: 'menu',
     message: 'Would you like to add an engineer to your team, add an intern to your team, or finish building your team?',
-    choices: ['Add an engineer', 'Add an intern', 'Finish building team']
+    choices: ['Add an engineer', 'Add an intern', 'Finish building team'] // the possible answers
   })
   .then((answers) => {
-    if (answers.menu === 'Add an engineer') {
-      promptEngineer();
+    if (answers.menu === 'Add an engineer') { 
+      promptEngineer(); // Sends the user to the engineer section to add an engineer
     }
     else if(answers.menu === 'Add an intern'){
-      promptIntern();
+      promptIntern(); // Sends the user to the intern section to add an intern
     }
     else{
-     console.log('Team Completed!');
+     console.log('Team Completed!'); // Finishes the questions for the user
     }
   })
   .catch(err => {
@@ -244,20 +244,20 @@ const promptMenu = () => {
 }
 
 
-promptQuestions()
+promptManager() // Starts the questions
 .then(team => {
-  console.log(team);
-  return generateHTML(team);
+  console.log(team); // logs all the team members
+  return generateHTML(team); // returns the html data generated using the team data
 })
-.then(html => {
-  return writeFile(html);
-})
-.then(fileResponse => {
-  console.log(fileResponse);
-  return copyFile();
+.then(html => { 
+  return writeFile(html); // Uses the html data to make an html file in the /dist folder
 })
 .then(fileResponse => {
-  console.log(fileResponse);
+  console.log(fileResponse); // Checks if the file was correctly made
+  return copyFile(); // Copies the css file from the /src folder to the /dist folder
+})
+.then(fileResponse => { 
+  console.log(fileResponse); // Checks if the file was correctly copied
 })
 .catch(err => {
   console.log(err);
