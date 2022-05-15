@@ -1,7 +1,6 @@
-const inquirer = require('inquirer');
+const inquirer = require('inquirer')
 const generateHTML = require('./src/page-template');
 const {writeFile, copyFile} = require('./utils/generate-file');
-
 
 var team = [];
 
@@ -75,8 +74,6 @@ const promptManager = () => {
     console.log(err);
   })
 };
-
-
 
 const promptEngineer = () => {
   const questions = [
@@ -246,4 +243,22 @@ const promptMenu = () => {
   });
 }
 
-promptManager()
+
+promptQuestions()
+.then(team => {
+  console.log(team);
+  return generateHTML(team);
+})
+.then(html => {
+  return writeFile(html);
+})
+.then(fileResponse => {
+  console.log(fileResponse);
+  return copyFile();
+})
+.then(fileResponse => {
+  console.log(fileResponse);
+})
+.catch(err => {
+  console.log(err);
+})
