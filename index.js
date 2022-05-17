@@ -235,7 +235,7 @@ const promptMenu = () => {
       promptIntern(); // Sends the user to the intern section to add an intern
     }
     else{
-     console.log('Team Completed!'); // Finishes the questions for the user
+     buildWebsite(); // Finishes the questions for the user and starts the build function
     }
   })
   .catch(err => {
@@ -243,22 +243,10 @@ const promptMenu = () => {
   });
 }
 
+const buildWebsite = () => {
+  let html = generateHTML(team) // returns the html data generated using the team data
+  writeFile(html) // uses the html data to make an index.html file in the /dist folder
+  copyFile()// copies the style.css file from the /src folder to the /dist folder
+}
 
-promptManager() // Starts the questions
-.then(team => {
-  console.log(team); // logs all the team members
-  return generateHTML(team); // returns the html data generated using the team data
-})
-.then(html => { 
-  return writeFile(html); // Uses the html data to make an html file in the /dist folder
-})
-.then(fileResponse => {
-  console.log(fileResponse); // Checks if the file was correctly made
-  return copyFile(); // Copies the css file from the /src folder to the /dist folder
-})
-.then(fileResponse => { 
-  console.log(fileResponse); // Checks if the file was correctly copied
-})
-.catch(err => {
-  console.log(err);
-})
+promptManager(); // starts the question prompts
